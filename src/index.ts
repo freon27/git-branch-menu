@@ -2,8 +2,7 @@ import simplegit from 'simple-git';
 import { terminal } from 'terminal-kit';
 import { BehaviorSubject } from 'rxjs';
 import { BranchSummary } from 'simple-git/promise';
-import { map, tap, withLatestFrom } from 'rxjs/operators';
-import { ListLogSummary } from 'simple-git/typings/response';
+import { map, withLatestFrom } from 'rxjs/operators';
 
 enum ListType {
   local,
@@ -61,21 +60,23 @@ branches$
           ? branches
           : filterAndTransformRemotes(branches);
       return data;
-    }),
-    tap(([branches, type]) => {
-
-
-      if(type === ListType.local) {
-        branches.forEach(branch =>
-          git.log({
-              from: branch,
-              to: 'origin'
-            }, (_error, log: ListLogSummary) =>
-              console.log(log.all.length)
-          )
-        );
-      }
     })
+    // ,
+    // tap(([branches, type]) => {
+    //
+    //
+    //   if(type === ListType.local) {
+    //     branches.forEach(branch =>
+    //       git.log({
+    //           from: branch,
+    //           to: 'origin/' + branch
+    //         }, (_error, log: ListLogSummary) =>
+    //           console.log(log.all.length)
+    //       )
+    //     );
+    //   }
+    //}
+    // )
   )
   .subscribe(([branches, type]: [string[], ListType]) => {
     terminal.reset();
