@@ -52,7 +52,7 @@
   "dependencies": {
     "rxjs": "^6.5.3",
     "sha.js": "^2.4.11",
-    "simple-git": "^1.129.0",
+    "simple-git": "^3.5.0",
     "terminal-kit": "^1.32.2"
   },
   "devDependencies": {
